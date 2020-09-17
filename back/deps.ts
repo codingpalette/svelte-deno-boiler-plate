@@ -9,3 +9,5 @@ export { hashSync, compareSync } from "https://deno.land/x/bcrypt/mod.ts";
 export { makeJwt, setExpiration, Jose, Payload } from "https://deno.land/x/djwt/create.ts";
 
 export { validateJwt, JwtObject } from "https://deno.land/x/djwt/validate.ts";
+
+export { oakCors } from "https://deno.land/x/cors@v1.2.0/mod.ts"
