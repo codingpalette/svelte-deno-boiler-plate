@@ -1,4 +1,5 @@
 import { Router, RouterContext } from "./deps.ts";
+import { authMiddleware } from "./middleware/authMiddleware.ts";
 import authController from "./controllers/AuthController.ts";
 
 const router = new Router();
