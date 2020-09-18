@@ -1,5 +1,6 @@
 <script lang="ts">
-    import { register, login } from '../api/auth';
+    import { register, login, check } from '../api/auth';
+    import client from '../api/client';
     let name = '';
     let email = '';
     let password = '';
@@ -14,17 +15,31 @@
     }
     const loginSubmit = async () => {
         try {
+
             const res = await login({email, password})
             console.log(res)
+            localStorage.setItem('jwt_key', res.data.jwt)
         } catch (e) {
             console.error(e)
         }
     }
     const onClickMe = async () => {
         try {
+            const key = localStorage.getItem('jwt_key');
+            if (key) {
+                client.defaults.headers.common['Authorization'] = key;
+            } else {
+                client.defaults.headers.common['Authorization'] = '';
+            }
+            const res = await check()
+            console.log(res)
         } catch (e) {
             console.error(e)
         }
+    }
+
+    const onClickLogOut = () => {
+        localStorage.removeItem('jwt_key');
     }
 </script>
 
@@ -44,7 +59,9 @@
         <button type="submit">로그인</button>
     </form>
 
-    <h3>토큰</h3>
-    <input type="text" bind:value={accessToken}>
+    <h2>토큰</h2>
     <button type="button" on:click={onClickMe}>로그인 유지</button>
+
+    <h2>로그아웃</h2>
+    <button type="button" on:click={onClickLogOut}>로그아웃</button>
 </div>
