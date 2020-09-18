@@ -12,7 +12,7 @@ router.get("/", (ctx: RouterContext) => {
 router
     .post('/auth/register', authController.register)
     .post('/auth/login', authController.login)
-    .get('/auth/check', authMiddleware)
+    .get('/auth/check', authMiddleware, authController.check)
 
 
 export default router;

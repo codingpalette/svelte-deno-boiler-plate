@@ -69,6 +69,14 @@ export class AuthController {
             jwt,
         };
     }
+    async check(ctx: RouterContext) {
+        const user: User = ctx.state.user as User;
+        ctx.response.body = {
+            id: user.id,
+            name: user.name,
+            email: user.email,
+        };
+    }
 }
 
 export default new AuthController();

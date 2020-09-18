@@ -5,6 +5,13 @@ const client = axios.create();
 
 client.defaults.baseURL = 'http://localhost:8000/';
 
+const key = localStorage.getItem('jwt_key');
+if (key) {
+    client.defaults.headers.common['Authorization'] = key;
+} else {
+    client.defaults.headers.common['Authorization'] = '';
+}
+
 
 
 
